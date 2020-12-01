@@ -1,0 +1,13 @@
+---
+# This playbook configures all the machines
+
+- hosts: raspberrypi
+  tasks:
+    - name: Install node-exporter
+      become: yes
+      apt:
+        name: prometheus-node-exporter
+
+- hosts: raspberrypi
+  roles:
+    - paulfantom.rpi_exporter

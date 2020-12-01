@@ -42,6 +42,10 @@
 
 ## db-[99:101]-node.example.com
 
+[raspberrypi]
+cluster-lead
+cluster-node-4
+
 [leader]
 cluster-lead
 
