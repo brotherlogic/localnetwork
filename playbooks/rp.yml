@@ -1,0 +1,6 @@
+---
+# Playbook for configuring raspberry pi nodes
+
+- hosts: raspberrypi
+  roles:
+    - paulfantom.rip_exporter
