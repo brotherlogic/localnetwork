@@ -2,6 +2,10 @@
 # This playbook configures all the machines
 
 - hosts: raspberrypi
+  roles:
+    - paulfantom.rpi_exporter
+
+- hosts: raspberrypi
   tasks:
     - name: Update apt-get repo and cache
       apt: update_cache=yes force_apt_get=yes cache_valid_time=604800
@@ -13,9 +17,22 @@
       become: yes
       apt:
         name: prometheus-node-exporter
+    - name: Configure the PoE fans
+      become: yes
+      blockinfile:
+        path: /boot/firmware/usercfg.txt
+        block: |
+          dtoverlay=rpi-poe
+          dtparam=poe_fan_temp0=75000,poe_fan_temp0_hyst=5000
+          dtparam=poe_fan_temp1=77000,poe_fan_temp1_hyst=2000
+          dtparam=poe_fan_temp2=80000,poe_fan_temp0_hyst=2000
+          dtparam=poe_fan_temp3=85000,poe_fan_temp1_hyst=2000
+      notify:
+      - Reboot
 
-- hosts: raspberrypi
-  roles:
-    - paulfantom.rpi_exporter
+  handlers:
+    - name: Reboot
+      become: yes
+      reboot:
 
 
