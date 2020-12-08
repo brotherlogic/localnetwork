@@ -4,3 +4,7 @@
 - hosts: raspberrypi
   roles:
     - paulfantom.rip_exporter
+
+- name: Set timezone to PST
+  timezone:
+    name: America/Los_Angeles
