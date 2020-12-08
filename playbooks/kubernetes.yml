@@ -19,6 +19,7 @@
         groups: microk8s
         append: yes
     - name: Change kubeconfig file permission
+      become: yes
       file:
         path: $HOME/.kube
         owner: "simon"
