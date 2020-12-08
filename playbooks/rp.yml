@@ -3,8 +3,15 @@
 
 - hosts: raspberrypi
   roles:
-    - paulfantom.rip_exporter
-
-- name: Set timezone to PST
-  timezone:
-    name: America/Los_Angeles
+    - paulfantom.rpi_exporter
+  tasks:
+  - name: Install the NTP daemon to synchronize the clocks to ms.
+    become: yes
+    apt: name=ntp
+  - name: Make sure ntp is started, and is enabled on restart.
+    become: yes
+    service: name=ntp state=started enabled=yes
+  - name: Set timezone to PST
+    become: yes
+    community.general.timezone:
+      name: America/Los_Angeles
