@@ -1,0 +1,15 @@
+---
+- hosts: kubes
+  tasks:
+    - name: Set the cgroups
+      become: yes
+      lineinfile:
+        path: /boot/firmware/cmdline.txt
+        regexp: '((.)+?)(\scgroup_\w+=\w+)*$'
+        line: '\1 cgroup_memory=1 cgroup_enable=memory'
+        backrefs: yes
+    - name: Install microk8s
+      become: yes
+      community.general.snap:
+        name: microk8s
+        classic: yes

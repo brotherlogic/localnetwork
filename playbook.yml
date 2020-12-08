@@ -1,9 +1,7 @@
 ---
 # This playbook configures all the machines
 
-- hosts: raspberrypi
-  roles:
-    - paulfantom.rpi_exporter
+- import_playbook: playbooks/rp.yml
 
 - hosts: raspberrypi
   tasks:
@@ -36,3 +34,4 @@
       reboot:
 
 
+- import_playbook: playbooks/kubernetes.yml
