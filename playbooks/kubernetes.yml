@@ -13,3 +13,14 @@
       community.general.snap:
         name: microk8s
         classic: yes
+    - name: Update user
+      user: 
+        name: simon
+        groups: microk8s
+        append: yes
+    - name: Change kubeconfig file permission
+      file:
+        path: $HOME/.kube
+        owner: "simon"
+        recurse: yes
+        force: yes
