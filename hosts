@@ -45,9 +45,13 @@
 [raspberrypi]
 cluster-lead
 cluster-node-4
+zero1
 
 [leader]
 cluster-lead
 
 [nodes]
 cluster-node-4
+
+[coffee]
+zero1
